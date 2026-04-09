@@ -1,0 +1,288 @@
+
+.itinerary-panel {
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.itinerary-header {
+  position: relative;
+  height: 180px;
+}
+
+.header-image-bg {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.header-actions-top {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.close-trip-btn, .invite-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  background: white;
+  color: #1a365d;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.invite-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.itinerary-body {
+  padding: 1.5rem;
+  flex: 1;
+}
+
+.itinerary-title-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.itinerary-title-card h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a365d;
+}
+
+.title-action-icons {
+  display: flex;
+  gap: 1rem;
+  color: #9ca3af;
+}
+
+.itinerary-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.opt-btn {
+  padding: 0.75rem;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.opt-btn:hover {
+  background: #e5e7eb;
+}
+
+.itinerary-stops-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+}
+
+.itinerary-stop-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.itinerary-stop-container:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: calc(50% + 15px);
+  left: 14px;
+  bottom: calc(-50% - 2rem + 15px);
+  width: 2px;
+  background: #e5e7eb;
+  z-index: 1;
+}
+
+.stop-left-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  flex-shrink: 0;
+}
+
+.stop-number-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #0252cc;
+  color: #0252cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  z-index: 2;
+  position: relative;
+}
+
+.stop-main-card {
+  flex: 1;
+}
+
+.stop-card-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: white;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.stop-card-inner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.stop-thumbnail {
+  width: 100px;
+  height: 70px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.stop-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.stop-thumbnail svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #9ca3af;
+}
+
+.stop-details {
+  flex: 1;
+}
+
+.stop-details h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.stop-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.action-icon-btn {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.action-icon-btn:hover {
+  background: #f1f5f9;
+  color: #1a365d;
+}
+
+.action-icon-btn.active {
+  background: #eef2ff;
+  color: #0252cc;
+}
+
+.more-menu-container {
+  position: relative;
+}
+
+.stop-action-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  min-width: 140px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.dropdown-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: #f8fafc;
+}
+
+.dropdown-item.delete {
+  color: #ef4444;
+}
+
+.dropdown-item.delete:hover {
+  background: #fef2f2;
+}
+
+.find-stops-link {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #2563eb;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.75rem;
+  cursor: pointer;
+}
+
+.find-stops-link:hover {
+  text-decoration: underline;
+}

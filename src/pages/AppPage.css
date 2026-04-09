@@ -1,0 +1,346 @@
+.app-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.app-panel-container {
+  width: 440px;
+  background: #fff;
+  border-right: 1px solid #e5e7eb;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-sidebar {
+  width: 72px;
+  background-color: var(--bg-white);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  z-index: 10;
+}
+
+.sidebar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1.25rem 0;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+  color: #6b7280;
+  cursor: pointer;
+  border-left: 3.5px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.sidebar-item:hover {
+  color: #111827;
+}
+
+.sidebar-item.active {
+  color: var(--primary-blue);
+  border-left-color: var(--primary-blue);
+}
+
+.start-trip-btn {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-dark);
+}
+
+.start-trip-icon {
+  background-color: var(--primary-blue);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-panel {
+  width: 360px;
+  background-color: var(--bg-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  z-index: 10;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  /* subtle shadow over map */
+}
+
+.panel-graphic {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #e5e7eb;
+  /* Fallback */
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.panel-graphic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.explore-placeholder-panel h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1.5rem;
+}
+
+.itinerary-empty-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+}
+
+.empty-panel-graphic img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 2rem;
+}
+
+.empty-panel-text {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #1f2937; /* Dark gray instead of pure black for softer look */
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+
+
+.start-trip-sidebar-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  cursor: pointer;
+  width: 100%;
+}
+
+.start-trip-circle-icon {
+  width: 24px;
+  height: 24px;
+  /* background-color: #0252cc; */
+  background-color: var(--primary-blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+
+.start-trip-sidebar-btn:hover .start-trip-circle-icon {
+  transform: scale(1.1);
+}
+
+.start-trip-sidebar-btn span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.create-trip-btn-large {
+  padding: 0.85rem 2.5rem;
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.create-trip-btn-large:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.create-trip-btn-blue {
+  padding: 0.9rem 2.5rem;
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.create-trip-btn-blue:hover {
+  background: #0f2a4d;
+  transform: translateY(-2px);
+}
+
+.app-panel h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  line-height: 1.4;
+  color: var(--text-dark);
+}
+
+.create-trip-btn {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.create-trip-btn:hover {
+  background-color: var(--secondary-blue);
+}
+
+.app-map-container {
+  flex: 1;
+  position: relative;
+  background-color: #e5e3df;
+  /* typical map tile background */
+}
+
+/* Map specific overrides */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Custom UI floating over map */
+.map-floating-ui {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 400;
+  /* above leaflet (typically 400) */
+  background: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.map-controls-right {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 400;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.map-btn {
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  color: #4b5563;
+}
+
+.map-btn-group {
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.map-btn-group button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: none;
+  color: #4b5563;
+}
+
+.map-btn-group button:first-child {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.chat-bubble {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  background-color: var(--footer-dark-blue);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 400;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+/* CSS trick to render map markers matching screenshot */
+.custom-marker {
+  font-family: inherit;
+  font-weight: 700;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.custom-marker img {
+  width: 30px;
+  height: 30px;
+}

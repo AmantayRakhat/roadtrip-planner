@@ -1,0 +1,234 @@
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.hero-section {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 8rem 2rem 6rem; /* Top padding accounts for navbar */
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-waves {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.hero-waves path {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 2;
+}
+
+.hero-content {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+  z-index: 1;
+}
+
+.hero-text {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero-text h1 {
+  font-size: 3.8rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  font-family: inherit; /* using the global sans-serif, maybe a serif if needed but screenshot looks like a modern serif for the header. I'll use a serif font-family specifically for the header */
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+}
+
+.search-widget {
+  background: transparent;
+}
+
+.search-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.search-tab {
+  flex: 1;
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+  color: var(--text-dark);
+  border: 2px solid transparent;
+}
+
+.search-tab.active {
+  border-color: #9ca3af; /* Grey border as requested */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.search-tab-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  margin-top: 0.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.search-tab.active .search-tab-radio {
+  border-color: var(--primary-blue);
+}
+
+.search-tab.active .search-tab-radio::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background-color: var(--primary-blue);
+  border-radius: 50%;
+}
+
+.search-tab-content h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-tab-content p {
+  font-size: 0.8rem;
+  color: var(--text-gray);
+  margin-bottom: 0;
+}
+
+.autopilot-logo {
+  color: var(--primary-blue);
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.search-inputs {
+  display: flex;
+  background-color: white;
+  border-radius: 8px;
+  padding: 0.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.search-input-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.search-input-wrapper:first-child::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background-color: var(--border-color);
+}
+
+.search-inputs input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: transparent;
+}
+
+.go-button {
+  background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-blue) 100%);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0 2.5rem;
+  border-radius: 6px;
+  margin-left: 0.5rem;
+  transition: transform 0.25s, box-shadow 0.25s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.go-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  background: linear-gradient(135deg, #004080 0%, var(--secondary-blue) 100%); /* slightly lighter navy on hover */
+}
+
+.explore-link {
+  display: inline-block;
+  margin-top: 1.75rem;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.explore-link a {
+  text-decoration: none;
+  border-bottom: 2px solid rgba(255,255,255,0.4);
+  transition: border-color 0.2s, color 0.2s;
+  padding-bottom: 2px;
+}
+
+.explore-link a:hover {
+  color: #f1f5f9;
+  border-color: #fff;
+}
+
+.hero-image-container {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  transition: transform 0.5s ease-out;
+}
+
+.hero-image-container:hover {
+  transform: scale(1.02);
+}
+
+.hero-image {
+  width: 450px;
+  height: 550px;
+  object-fit: cover;
+  clip-path: polygon(0% 15%, 25% 10%, 50% 15%, 75% 5%, 100% 15%, 100% 85%, 75% 95%, 50% 85%, 25% 90%, 0% 85%); 
+  /* Creating a mock wavy shape using border-radius for simplicity but rounded heavily */
+  border-radius: 40px 140px 40px 140px;
+  background-color: #d1d5db;
+}
+
+.hero-decorator {
+  position: absolute;
+  top: -40px;
+  right: 50px;
+  width: 120px;
+  height: 120px;
+}

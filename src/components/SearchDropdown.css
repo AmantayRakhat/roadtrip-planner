@@ -1,0 +1,67 @@
+
+.search-dropdown-overlay {
+  position: fixed;
+  top: 64px; /* Navbar height */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-left: 154px; /* Align with search bar */
+  padding-top: 10px;
+}
+
+.search-dropdown-card {
+  width: 500px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.dropdown-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1.25rem;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.category-item-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.8rem;
+  background: transparent;
+  border: 1px solid #e1e1e1; /* Matched to screenshot */
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.category-item-btn:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.cat-icon {
+  color: #1a365d;
+  display: flex;
+  align-items: center;
+}
+
+.cat-name {
+  font-weight: 500;
+}

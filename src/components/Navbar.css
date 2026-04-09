@@ -1,0 +1,105 @@
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  font-family: var(--font-family);
+  position: relative;
+  z-index: 100;
+}
+
+.navbar-container.app-variant {
+  background-color: var(--bg-white);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-dark);
+}
+
+.navbar-container.landing-variant {
+  background-color: transparent;
+  color: var(--bg-white);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  width: 300px;
+  color: var(--text-dark);
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  margin-left: 0.5rem;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  opacity: 0.8;
+}
+
+.navbar-auth {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.login-btn, .signup-btn {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: inherit;
+}
+
+.login-btn:hover, .signup-btn:hover {
+  text-decoration: underline;
+}
+
+.profile-icon {
+  background-color: #38b2ac; /* Teal profile color */
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

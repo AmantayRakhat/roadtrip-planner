@@ -1,0 +1,165 @@
+.footer {
+  background: linear-gradient(180deg, var(--footer-dark-blue) 0%, var(--footer-darker) 100%);
+  color: #94a3b8;
+  padding: 5rem 2rem 3rem;
+  font-family: var(--font-family);
+  font-size: 0.95rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.footer-top {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.app-btn {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  font-size: 0.75rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.app-btn:hover {
+  transform: translateY(-3px);
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.app-btn-icon {
+  font-size: 1.5rem;
+  color: #e2e8f0;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1.25rem;
+  color: #94a3b8;
+}
+
+.social-icons > * {
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.social-icons > *:hover {
+  color: var(--accent-color);
+  transform: translateY(-2px) scale(1.1);
+}
+
+.footer-links-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-col-title {
+  color: #e2e8f0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.footer-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.footer-col a {
+  color: #94a3b8;
+  transition: color 0.2s, transform 0.2s;
+  display: inline-block;
+}
+
+.footer-col a:hover {
+  color: #fff;
+  transform: translateX(4px);
+}
+
+.footer-latest .latest-article {
+  margin-bottom: 1.5rem;
+  display: block;
+  line-height: 1.5;
+  color: #cbd5e1;
+  transition: color 0.2s;
+}
+
+.footer-latest .latest-article:hover {
+  color: var(--accent-color);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-logo {
+  font-size: 1.75rem;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.5px;
+  color: #fff;
+}
+
+.footer-legal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.25rem;
+}
+
+.footer-legal-links {
+  display: flex;
+  gap: 2.5rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+}
+
+.footer-legal-links a {
+  transition: color 0.2s;
+}
+
+.footer-legal-links a:hover {
+  color: #fff;
+}
+
+.footer-copyright {
+  font-size: 0.85rem;
+  color: #64748b;
+}
