@@ -1,0 +1,116 @@
+.sort-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(26, 46, 90, 0.4);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.sort-modal-content {
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 440px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.sort-modal-header {
+  position: relative;
+  text-align: center;
+}
+
+.sort-modal-header h2 {
+  font-family: inherit; /* User didn't specify the exact serif globally, default is fine */
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1a2e5a;
+  margin: 0;
+  padding-top: 1rem;
+}
+
+.sort-modal-header .close-action-btn {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.sort-modal-header .close-action-btn:hover {
+  background: #f9fafb;
+}
+
+.sort-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.sort-option-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  cursor: pointer;
+}
+
+.sort-option-text {
+  font-size: 1rem;
+  color: #1a2e5a;
+  font-weight: 500;
+}
+
+.sort-radio {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sort-radio.selected {
+  border-color: #1a2e5a;
+}
+
+.radio-inner-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #1a2e5a;
+}
+
+.sort-modal-footer {
+  margin-top: 1rem;
+}
+
+.apply-btn {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+}

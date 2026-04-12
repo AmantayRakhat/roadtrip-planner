@@ -1,8 +1,8 @@
 :root {
-  --primary-blue: #153A6A; /* Lighter, elegant navy (not too dark) */
-  --secondary-blue: #1E4E8A; /* Lighter accent navy */
-  --footer-dark-blue: #0F1929; /* Slightly lighter deep slate/navy for footer */
-  --footer-darker: #050912; /* Very dark blue instead of absolute black */
+  --primary-blue: #1a365d; /* Firm Navy */
+  --secondary-blue: #1e4b8a; /* Slightly lighter Navy for hovers */
+  --footer-dark-blue: #0f172a;
+  --footer-darker: #020617;
   --accent-color: #38bdf8;
   --text-dark: #0f172a;
   --text-gray: #64748b;

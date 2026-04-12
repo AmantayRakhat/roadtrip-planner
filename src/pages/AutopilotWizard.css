@@ -167,16 +167,54 @@
 }
 
 .step-dot {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #cbd5e1;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .step-dot.active {
   background: var(--primary-blue);
-  width: 16px;
-  border-radius: 4px;
+  /* width: 20px;
+  border-radius: 10px; */
+}
+
+.step-dot.done {
+  background: var(--primary-blue);
+  opacity: 0.4;
+}
+
+/* Extra Prefs Styles */
+.extra-prefs-container {
+  width: 100%;
+  max-width: 650px;
+  margin-bottom: 2rem;
+}
+
+.extra-prefs-textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 2px solid #e2e8f0;
+  font-family: inherit;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  resize: none;
+  transition: all 0.2s ease;
+  background: white;
+  color: var(--text-dark);
+}
+
+.extra-prefs-textarea:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 4px rgba(2, 82, 204, 0.1);
+}
+
+.extra-prefs-textarea::placeholder {
+  color: #94a3b8;
 }
 
 /* Step 2 & 4: Split Layout (Sidebar + Map) */
@@ -308,6 +346,63 @@
   font-weight: 500;
 }
 
+.stop-left-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;   /* fill full card height so ::before calc(100%) works */
+  position: relative;
+  width: 24px;
+}
+
+.stop-number {
+  width: 24px;
+  height: 24px;
+  background: #1a365d;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  z-index: 2;
+  position: relative;
+  box-shadow: 0 0 0 3px white;
+}
+
+.distance-label-wizard {
+  position: absolute;
+  top: -24px;
+  left: 36px;
+  background: white;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #6b7280;
+  white-space: nowrap;
+  border: 1px solid #e5e7eb;
+}
+
+.drag-handle-wizard {
+  cursor: grab;
+  padding-right: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.drag-handle-wizard:active {
+  cursor: grabbing;
+}
+
+.recalculating.route-stops-list {
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
 .route-stops-list {
   display: flex;
   flex-direction: column;
@@ -318,38 +413,30 @@
 .route-stop-item {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
   position: relative;
-}
-
-.route-stop-item:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  top: calc(50% + 15px); /* Start below the centered circle */
-  left: 14px; /* Center of the 30px circle */
-  bottom: calc(-50% - 1.5rem + 15px); /* Extend to the top of the next centered circle */
-  width: 2px;
-  background: var(--primary-blue);
+  cursor: default;
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s ease;
   z-index: 1;
 }
 
-.stop-number {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: white;
-  border: 2px solid var(--primary-blue);
-  color: var(--primary-blue);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 2;
+.route-stop-item:active {
+  cursor: grabbing;
 }
 
-/* Removed the static list-wide line */
+
+
+.route-stop-item:not(:last-child) .stop-left-column::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: calc(100% + 1.5rem);
+  background-color: #1a365d;
+  z-index: 0;
+}
 
 .stop-card {
   flex: 1;
@@ -400,7 +487,12 @@
   border-top: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background: white;
+}
+
+.indicators-sidebar {
+  gap: 0.5rem !important;
 }
 
 .wizard-map-area {
@@ -426,13 +518,21 @@
   margin-bottom: 1.5rem;
 }
 
-.loading-title {
-  font-size: 3rem;
+.load.wizard-title {
+  font-size: 2.8rem;
   font-weight: 700;
   color: var(--primary-blue);
   text-align: center;
-  line-height: 1.2;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.wizard-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-gray);
+  text-align: center;
   margin-bottom: 3rem;
+  max-width: 600px;
 }
 
 .loading-steps-card {

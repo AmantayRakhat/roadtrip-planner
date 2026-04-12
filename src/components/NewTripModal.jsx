@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { X, Sparkles, Navigation } from 'lucide-react';
 import './NewTripModal.css';
 
-const NewTripModal = ({ onClose, onCreateTrip }) => {
+const NewTripModal = ({ onClose, onCreateTrip, initialDestination = '' }) => {
   const [start, setStart] = useState('');
-  const [destination, setDestination] = useState('');
+  const [destination, setDestination] = useState(initialDestination);
 
   return (
     <div className="modal-overlay" onClick={onClose}>

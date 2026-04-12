@@ -1,0 +1,145 @@
+.results-modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 420px;
+  max-height: 85vh; /* To allow scrolling if too tall */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  overflow: hidden; /* Header and Footer fixed */
+}
+
+.results-modal-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.results-modal-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a2e5a;
+}
+
+.results-modal-header .close-action-btn {
+  position: static;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  color: #6b7280;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  padding: 0; /* Reset global button padding if any */
+  transition: background-color 0.2s;
+  box-sizing: border-box;
+}
+
+.results-modal-header .close-action-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.results-modal-header .close-action-btn:hover {
+  background: #f9fafb;
+}
+
+.results-modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #1a2e5a;
+}
+
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.filter-checkbox-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0;
+  cursor: pointer;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.filter-checkbox-row:last-child {
+  border-bottom: none;
+}
+
+.filter-checkbox-row span {
+  font-size: 0.95rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+.custom-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  cursor: pointer;
+  accent-color: #1a2e5a;
+}
+
+.results-modal-footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-reset-filters {
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn-reset-filters:hover {
+  color: #1a2e5a;
+}
+
+.btn-view-places {
+  background-color: #0d1b2a; /* Very dark blue matching Photo 4 */
+  color: white;
+  border: none;
+  border-radius: 24px;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-view-places:hover {
+  background-color: #1a2e5a;
+}

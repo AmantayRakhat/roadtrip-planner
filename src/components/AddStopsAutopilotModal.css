@@ -1,0 +1,368 @@
+.add-stops-autopilot-modal {
+  width: 90%;
+  max-width: 480px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.autopilot-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  color: #1a365d; /* NAVY */
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.brand-subtitle {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1a365d;
+  margin-top: 2px;
+}
+
+.modal-top-bar .close-btn {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  color: #94a3b8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  transition: all 0.2s;
+}
+
+.autopilot-content {
+  padding: 1.5rem;
+  min-height: 350px;
+}
+
+.autopilot-step-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.autopilot-modal-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a365d;
+  margin: 0 0 1.25rem 0;
+  line-height: 1.2;
+}
+
+.autopilot-modal-subtitle {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: -0.75rem 0 1.25rem 0;
+}
+
+/* List Items with Circle on Right (Photo 1 & 2) */
+.autopilot-options-list, .autopilot-grid-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.autopilot-grid-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.autopilot-radio-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+}
+
+.autopilot-radio-card span {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.autopilot-radio-card.selected {
+  border-color: #1a365d;
+  background-color: #f8fafc;
+}
+
+.hidden-radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.radio-circle.active {
+  border-color: #1a365d;
+  background-color: #1a365d;
+}
+
+.radio-inner {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+/* Budget Slider (Photo 1) */
+.budget-section {
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.budget-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 1.25rem;
+}
+
+.budget-slider {
+  width: 100%;
+  height: 4px;
+  background: #1a365d;
+  border-radius: 2px;
+  appearance: none;
+  outline: none;
+}
+
+.budget-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #1a365d;
+  cursor: pointer;
+}
+
+.budget-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+/* Results Cards (Photo 4) */
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  max-height: 380px;
+  overflow-y: auto;
+  margin-bottom: 0.5rem;
+}
+
+.recommendation-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.rec-close-btn {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  color: #6b7280;
+  z-index: 10;
+}
+
+.rec-img {
+  height: 140px;
+  width: 100%;
+}
+
+.rec-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.rec-info {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.rec-info h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a365d;
+  line-height: 1.2;
+}
+
+.rec-info p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.btn-add-rec {
+  margin-top: auto;
+  width: 100%;
+  padding: 0.55rem;
+  border-radius: 50px;
+  border: none;
+  background-color: #ebf5ff;
+  color: #1a365d;
+  font-weight: 800;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  cursor: pointer;
+}
+
+.add-icon {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.btn-add-rec.added {
+  background-color: #f3f4f6;
+  color: #94a3b8;
+}
+
+/* Skeleton */
+.skeleton-card {
+  height: 240px;
+  background: #f3f4f6;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.skeleton-card {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Footer Control */
+.autopilot-footer-notice {
+  text-align: center;
+  height: 24px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1a365d;
+  margin-bottom: 0.5rem;
+}
+
+.autopilot-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.autopilot-back-btn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #111827;
+  font-weight: 800;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.autopilot-next-btn, .autopilot-done-btn {
+  background-color: #1a365d;
+  color: white;
+  padding: 0.8rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 1.05rem;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.autopilot-next-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}

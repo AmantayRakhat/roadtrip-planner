@@ -20,10 +20,10 @@ import L from 'leaflet';
 import './AppPage.css';
 
 const INITIAL_STOPS = [
-  { id: 1, name: "Almaty, Kazakhstan", type: "city", img: "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=200&auto=format&fit=crop", distance: null, time: null },
-  { id: 2, name: "Charyn Canyon National Park", type: "nature", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=200&auto=format&fit=crop", distance: "416 mi", time: "9h 41m" },
-  { id: 3, name: "Kolsay Lakes State Park", type: "nature", img: "https://images.unsplash.com/photo-1518005020251-582c7eb8d7fc?q=80&w=200&auto=format&fit=crop", distance: "20 mi", time: "34m" },
-  { id: 4, name: "Astana, Kazakhstan", type: "city", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=200&auto=format&fit=crop", distance: "780 mi", time: "11h 20m" }
+  { id: 1, name: "Almaty, Kazakhstan", type: "city", img: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=400&q=80", distance: null, time: null, isVisible: true },
+  { id: 2, name: "Charyn Canyon National Park", type: "nature", img: "https://images.unsplash.com/photo-1549421263-54948efadbc3?auto=format&fit=crop&w=400&q=80", distance: "416 mi", time: "9h 41m", isVisible: true },
+  { id: 3, name: "Kolsay Lakes State Park", type: "nature", img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80", distance: "20 mi", time: "34m", isVisible: true },
+  { id: 4, name: "Astana, Kazakhstan", type: "city", img: "https://images.unsplash.com/photo-1518391846015-55a9cc00bb01?auto=format&fit=crop&w=400&q=80", distance: "780 mi", time: "11h 20m", isVisible: true }
 ];
 
 const recalculateWaypoints = async (orderedWaypoints) => {
@@ -67,11 +67,14 @@ const AppPage = () => {
   };
 
   const handleAddStopToTrip = async (place) => {
+    const stopName = place.title || place.name || "Unknown Place";
+    const stopImg = place.img || 'https://images.unsplash.com/photo-1555507036-ab1d4075cbf9?auto=format&fit=crop&q=80&w=400&h=300';
+
     if (itineraryStops.length < 2) {
       setItineraryStops([...itineraryStops, { 
         id: Date.now(), 
-        name: place.title, 
-        img: place.img || 'https://images.unsplash.com/photo-1555507036-ab1d4075cbf9?auto=format&fit=crop&q=80&w=400&h=300',
+        name: stopName, 
+        img: stopImg,
         type: 'nature'
       }]);
       return;
@@ -82,8 +85,8 @@ const AppPage = () => {
     const insertIndex = newStops.length - 1;
     newStops.splice(insertIndex, 0, {
       id: Date.now(),
-      name: place.title,
-      img: place.img || 'https://images.unsplash.com/photo-1555507036-ab1d4075cbf9?auto=format&fit=crop&q=80&w=400&h=300',
+      name: stopName,
+      img: stopImg,
       type: 'nature'
     });
 
@@ -142,7 +145,15 @@ const AppPage = () => {
       )}
 
       {showAddStopsAutopilotModal && (
-        <AddStopsAutopilotModal onClose={() => setShowAddStopsAutopilotModal(false)} />
+        <AddStopsAutopilotModal 
+          key="autopilot-modal-main"
+          onClose={() => setShowAddStopsAutopilotModal(false)} 
+          onAddStop={handleAddStopToTrip}
+          onBackToWaypoint={() => {
+            setShowAddStopsAutopilotModal(false);
+            setShowAddWaypointModal(true);
+          }}
+        />
       )}
 
       {showCancelModal && (
@@ -197,7 +208,7 @@ const AppPage = () => {
           {activeTab === 'itinerary' && isTripActive && (
             <ItineraryPanel 
               onClose={() => setShowCancelModal(true)} 
-              onFindStops={() => setShowAddStopsAutopilotModal(true)}
+              onFindStops={() => setShowAddWaypointModal(true)}
               stops={itineraryStops}
               onUpdateStops={setItineraryStops}
               onRecalculate={handleUpdateStops}
