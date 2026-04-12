@@ -22,7 +22,7 @@ import {
 import './ItineraryPanel.css';
 
 // ─── Sortable Stop Item (The "Perfect" Structure) ───────────────────────────
-const SortableStop = ({ stop, index, total, nextStop, activeMenuId, toggleMenu, handleRemoveStop, onFindStops, onToggleVisibility, isLast }) => {
+const SortableStop = ({ stop, index, visibleIndex, lineType, total, nextStop, activeMenuId, toggleMenu, handleRemoveStop, onFindStops, onToggleVisibility, isLast }) => {
   const {
     attributes,
     listeners,
@@ -41,9 +41,9 @@ const SortableStop = ({ stop, index, total, nextStop, activeMenuId, toggleMenu, 
   };
 
   return (
-    <div ref={setNodeRef} style={style} className={`route-stop-item ${isLast ? 'is-last-stop' : ''}`}>
+    <div ref={setNodeRef} style={style} className={`route-stop-item ${isLast ? 'is-last-stop' : ''} ${stop.isVisible === false ? 'is-hidden' : ''} line-${lineType}`}>
       <div className="stop-left-column">
-        <div className="stop-number">{index + 1}</div>
+        {stop.isVisible !== false && <div className="stop-number">{visibleIndex}</div>}
       </div>
 
       <div className="stop-main-card">
@@ -75,11 +75,11 @@ const SortableStop = ({ stop, index, total, nextStop, activeMenuId, toggleMenu, 
               )}
             </div>
             <button 
-              className={`action-icon-btn ${stop.isVisible === false ? 'hidden-stop' : ''}`} 
+              className={`eye-action-btn ${stop.isVisible === false ? 'hidden' : 'visible'}`} 
               onClick={() => onToggleVisibility && onToggleVisibility(stop.id)}
               title={stop.isVisible === false ? "Show on route" : "Hide on route"}
             >
-              {stop.isVisible === false ? <EyeOff size={18} color="#9ca3af" /> : <Eye size={18} color="#9ca3af" />}
+              {stop.isVisible === false ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
         </div>
@@ -216,7 +216,7 @@ const ItineraryPanel = ({ onClose, onFindStops, stops = [], onUpdateStops, onRec
             <button className="opt-btn">Add dates</button>
           </div>
 */}
-          <h2 className="itinerary-title">Itinerary</h2>
+          {/* <h2 className="itinerary-title">Itinerary</h2> */}
 
           <DndContext
             sensors={sensors}
@@ -229,21 +229,43 @@ const ItineraryPanel = ({ onClose, onFindStops, stops = [], onUpdateStops, onRec
               strategy={verticalListSortingStrategy}
             >
               <div className="route-stops-list premium-list">
-                {stops.map((stop, i) => (
-                  <SortableStop
-                    key={stop.id}
-                    stop={stop}
-                    index={i}
-                    total={stops.length}
-                    nextStop={stops[i + 1]}
-                    isLast={i === stops.length - 1}
-                    activeMenuId={activeMenuId}
-                    toggleMenu={toggleMenu}
-                    handleRemoveStop={handleRemoveStop}
-                    onFindStops={onFindStops}
-                    onToggleVisibility={(id) => onUpdateStops(prev => prev.map(s => s.id === id ? {...s, isVisible: !s.isVisible} : s))}
-                  />
-                ))}
+                {(() => {
+                  let visibleCount = 0;
+                  const firstVisibleIdx = stops.findIndex(s => s.isVisible !== false);
+                  const reversedIdx = [...stops].reverse().findIndex(s => s.isVisible !== false);
+                  const lastVisibleIdx = reversedIdx === -1 ? -1 : stops.length - 1 - reversedIdx;
+
+                  return stops.map((stop, i) => {
+                    let lineType = 'middle';
+                    if (firstVisibleIdx === -1 || i < firstVisibleIdx || i > lastVisibleIdx) {
+                      lineType = 'none';
+                    } else if (i === firstVisibleIdx) {
+                      lineType = (firstVisibleIdx === lastVisibleIdx) ? 'none' : 'start';
+                    } else if (i === lastVisibleIdx) {
+                      lineType = 'end';
+                    }
+
+                    if (stop.isVisible !== false) visibleCount++;
+                    
+                    return (
+                      <SortableStop
+                        key={stop.id}
+                        stop={stop}
+                        index={i}
+                        visibleIndex={visibleCount}
+                        lineType={lineType}
+                        total={stops.length}
+                        nextStop={stops[i + 1]}
+                        isLast={i === stops.length - 1}
+                        activeMenuId={activeMenuId}
+                        toggleMenu={toggleMenu}
+                        handleRemoveStop={handleRemoveStop}
+                        onFindStops={onFindStops}
+                        onToggleVisibility={(id) => onUpdateStops(prev => prev.map(s => s.id === id ? {...s, isVisible: !s.isVisible} : s))}
+                      />
+                    );
+                  });
+                })()}
               </div>
             </SortableContext>
 

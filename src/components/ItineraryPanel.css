@@ -143,20 +143,36 @@
 }
 
 /* Perfect Connector Line Segment */
+/* Base Line Style (Hidden by default) */
 .itinerary-panel.premium-v2 .stop-left-column::before {
   content: '';
   position: absolute;
-  top: 14px; /* Start exactly from the center of the 28px circle */
   left: 50%;
   transform: translateX(-50%);
   width: 2px;
-  height: calc(100% + 1.25rem); /* Item height + the gap to reach next circle */
   background-color: #111827 !important;
   z-index: 0;
+  display: none;
 }
 
-.itinerary-panel.premium-v2 .route-stop-item.is-last-stop .stop-left-column::before,
-.itinerary-panel.premium-v2 .route-stop-item.ghost .stop-left-column::before {
+/* Start Segment: From center of bubble downwards */
+.line-start .stop-left-column::before {
+  display: block;
+  top: 14px;
+  height: calc(100% - 14px + 1.25rem);
+}
+
+/* Middle Segment: Full height of the item plus gap */
+.line-middle .stop-left-column::before {
+  display: block;
+  top: 0;
+  height: calc(100% + 1.25rem);
+}
+
+/* None and End Segments: No line below */
+.line-none .stop-left-column::before,
+.line-end .stop-left-column::before,
+.route-stop-item.ghost .stop-left-column::before {
   display: none !important;
 }
 
@@ -263,27 +279,45 @@
   gap: 0.4rem;
 }
 
-.action-icon-btn {
-  background: none;
-  border: none;
-  color: #9ca3af;
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 6px;
-  transition: all 0.2s;
+/* Hidden States (Faded Cards) */
+.route-stop-item.is-hidden {
+  opacity: 0.55;
+  transition: opacity 0.3s ease;
+}
+
+.route-stop-item.is-hidden .stop-footer {
+  display: none; /* Hide 'Find stops here' when hidden */
+}
+
+/* Floating White Eye Button */
+.eye-action-btn {
+  width: 32px;
+  height: 32px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #1a365d; /* Navy */
 }
 
-.action-icon-btn:hover {
-  background: #f3f4f6;
-  color: #1a365d;
+.eye-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: #cbd5e1;
 }
 
-.action-icon-btn.hidden-stop {
-  color: #d1d5db;
-  opacity: 0.6;
+.eye-action-btn.hidden {
+  color: #94a3b8; /* Muted color for EyeOff */
+}
+
+/* Ensure line logic doesn't hide when card is hidden */
+.route-stop-item.is-hidden .stop-left-column::after {
+  opacity: 1;
 }
 
 /* Footer Section */
