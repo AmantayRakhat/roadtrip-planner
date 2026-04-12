@@ -1,20 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import AuthModal from '../components/AuthModal';
 import NewTripModal from '../components/NewTripModal';
 import ConfirmModal from '../components/ConfirmModal';
+import AddStopsAutopilotModal from '../components/AddStopsAutopilotModal';
+import AddWaypointModal from '../components/AddWaypointModal';
 import {
   Compass, List, MapPin, Plus, ArrowLeft,
-  Layers, Navigation2, Search, MessageSquare
+  Layers, Navigation2, Search, MessageSquare, ChevronRight, Home, Image as ImageIcon
 } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import SearchDropdown from '../components/SearchDropdown';
 import ItineraryPanel from '../components/ItineraryPanel';
+import ExplorePanel from '../components/ExplorePanel';
 import MyTripsPanel from '../components/MyTripsPanel';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import './AppPage.css';
+
+const INITIAL_STOPS = [
+  { id: 1, name: "Almaty, Kazakhstan", type: "city", img: "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=200&auto=format&fit=crop", distance: null, time: null },
+  { id: 2, name: "Charyn Canyon National Park", type: "nature", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=200&auto=format&fit=crop", distance: "416 mi", time: "9h 41m" },
+  { id: 3, name: "Kolsay Lakes State Park", type: "nature", img: "https://images.unsplash.com/photo-1518005020251-582c7eb8d7fc?q=80&w=200&auto=format&fit=crop", distance: "20 mi", time: "34m" },
+  { id: 4, name: "Astana, Kazakhstan", type: "city", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=200&auto=format&fit=crop", distance: "780 mi", time: "11h 20m" }
+];
+
+const recalculateWaypoints = async (orderedWaypoints) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const distances = ["120 mi", "45 mi", "230 mi", "15 mi", "90 mi"];
+      const times = ["2h 15m", "45m", "4h 10m", "22m", "1h 30m"];
+      const updated = orderedWaypoints.map((stop, i) => {
+        if (i === 0) return { ...stop, distance: null, time: null };
+        return {
+          ...stop,
+          distance: distances[i % distances.length],
+          time: times[i % times.length],
+        };
+      });
+      resolve(updated);
+    }, 600);
+  });
+};
 
 const AppPage = () => {
   const navigate = useNavigate();
@@ -26,7 +54,43 @@ const AppPage = () => {
 
   // Modal states
   const [showNewTripModal, setShowNewTripModal] = useState(false);
+  const [showAddWaypointModal, setShowAddWaypointModal] = useState(false);
+  const [showAddStopsAutopilotModal, setShowAddStopsAutopilotModal] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
+  const [initialTripDestination, setInitialTripDestination] = useState('');
+  const [itineraryStops, setItineraryStops] = useState(INITIAL_STOPS);
+  const [activeExploreCategory, setActiveExploreCategory] = useState(null);
+
+  const handleUpdateStops = async (newStops) => {
+    const recalculated = await recalculateWaypoints(newStops);
+    setItineraryStops(recalculated);
+  };
+
+  const handleAddStopToTrip = async (place) => {
+    if (itineraryStops.length < 2) {
+      setItineraryStops([...itineraryStops, { 
+        id: Date.now(), 
+        name: place.title, 
+        img: place.img || 'https://images.unsplash.com/photo-1555507036-ab1d4075cbf9?auto=format&fit=crop&q=80&w=400&h=300',
+        type: 'nature'
+      }]);
+      return;
+    }
+
+    // Insert before the last stop
+    const newStops = [...itineraryStops];
+    const insertIndex = newStops.length - 1;
+    newStops.splice(insertIndex, 0, {
+      id: Date.now(),
+      name: place.title,
+      img: place.img || 'https://images.unsplash.com/photo-1555507036-ab1d4075cbf9?auto=format&fit=crop&q=80&w=400&h=300',
+      type: 'nature'
+    });
+
+    const recalculated = await recalculateWaypoints(newStops);
+    setItineraryStops(recalculated);
+    setActiveTab('itinerary'); // Switch to itinerary to show the result
+  };
 
   const handleCreateTrip = (method) => {
     if (method === 'autopilot') {
@@ -45,13 +109,40 @@ const AppPage = () => {
     <div className="app-page">
       {authMode && <AuthModal initialMode={authMode} onClose={() => setAuthMode(null)} />}
 
-      {searchOpen && <SearchDropdown onClose={() => setSearchOpen(false)} />}
+      {searchOpen && (
+        <SearchDropdown 
+          onClose={() => setSearchOpen(false)} 
+          onSelectCategory={(cat) => {
+            setActiveExploreCategory(cat);
+            setActiveTab('explore');
+            setSearchOpen(false);
+          }}
+        />
+      )}
 
       {showNewTripModal && (
         <NewTripModal 
-          onClose={() => setShowCancelModal(true)} 
+          onClose={() => {
+            setShowNewTripModal(false);
+            setInitialTripDestination(''); 
+          }} 
           onCreateTrip={handleCreateTrip}
+          initialDestination={initialTripDestination}
         />
+      )}
+
+      {showAddWaypointModal && (
+        <AddWaypointModal 
+          onClose={() => setShowAddWaypointModal(false)}
+          onUseAutopilot={() => {
+            setShowAddWaypointModal(false);
+            setShowAddStopsAutopilotModal(true);
+          }}
+        />
+      )}
+
+      {showAddStopsAutopilotModal && (
+        <AddStopsAutopilotModal onClose={() => setShowAddStopsAutopilotModal(false)} />
       )}
 
       {showCancelModal && (
@@ -77,6 +168,8 @@ const AppPage = () => {
         onOpenAuth={setAuthMode}
         onSearchFocus={() => setSearchOpen(true)}
         onSearchBlur={() => setSearchOpen(false)}
+        activeExploreCategory={activeExploreCategory}
+        onClearExploreCategory={() => setActiveExploreCategory(null)}
       />
 
       <div className="app-content">
@@ -93,16 +186,22 @@ const AppPage = () => {
             <MapPin size={24} />
             <span>My trips</span>
           </div>
-          <div className="sidebar-item" onClick={() => setShowNewTripModal(true)}>
-            <div className="start-trip-circle-icon"><Plus size={16} color="white" /></div>
-            <span>Start Trip</span>
+          <div className={`sidebar-item ${isTripActive ? 'add-to-trip' : ''}`} onClick={() => isTripActive ? setShowAddWaypointModal(true) : setShowNewTripModal(true)}>
+            <div className={`start-trip-circle-icon ${isTripActive ? 'blue-icon' : ''}`}><Plus size={16} color="white" /></div>
+            <span>{isTripActive ? 'Add to Trip' : 'Start Trip'}</span>
           </div>
         </div>
 
         <div className="app-panel-container">
           {/* ... (panels remain the same) */}
           {activeTab === 'itinerary' && isTripActive && (
-            <ItineraryPanel onClose={() => setShowCancelModal(true)} />
+            <ItineraryPanel 
+              onClose={() => setShowCancelModal(true)} 
+              onFindStops={() => setShowAddStopsAutopilotModal(true)}
+              stops={itineraryStops}
+              onUpdateStops={setItineraryStops}
+              onRecalculate={handleUpdateStops}
+            />
           )}
 
           {activeTab === 'itinerary' && !isTripActive && (
@@ -128,13 +227,15 @@ const AppPage = () => {
           )}
 
           {activeTab === 'explore' && (
-            <div className="explore-placeholder-panel">
-              <div className="panel-graphic">
-                <img src="https://a.d-cd.net/ebbe39ds-960.jpg" alt="Road" />
-              </div>
-              <h3>Explore Kazakhstan.<br />Find stops and add them to your trip.</h3>
-              <button className="btn-secondary" onClick={() => setActiveTab('itinerary')}>View Itinerary</button>
-            </div>
+            <ExplorePanel 
+              activeCategory={activeExploreCategory} 
+              onAddPlace={(placeName) => {
+                setInitialTripDestination(placeName);
+                setShowNewTripModal(true);
+              }}
+              isTripActive={isTripActive}
+              onAddCurrentTripStop={handleAddStopToTrip}
+            />
           )}
         </div>
 
