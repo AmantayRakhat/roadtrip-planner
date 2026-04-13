@@ -426,7 +426,7 @@
 
 
 
-.route-stop-item:not(:last-child) .stop-left-column::before {
+.autopilot-wizard .route-stop-item:not(:last-child) .stop-left-column::before {
   content: '';
   position: absolute;
   top: 50%;

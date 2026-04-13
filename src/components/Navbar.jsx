@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Search, ChevronDown, User, X, Crown, LogOut, Settings, HelpCircle, FileText, Heart, Map as MapIcon, User as UserIcon, Bookmark } from 'lucide-react';
 import './Navbar.css';
 
-const Navbar = ({ variant = 'landing', onOpenAuth, onSearchFocus, onSearchBlur, activeExploreCategory, onClearExploreCategory }) => {
+const Navbar = ({ variant = 'landing', onOpenAuth, onSearchFocus, onSearchBlur, activeExploreCategory, onClearExploreCategory, onSelectCategory }) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const profileRef = useRef(null);
   const isApp = variant === 'app';
@@ -17,6 +17,13 @@ const Navbar = ({ variant = 'landing', onOpenAuth, onSearchFocus, onSearchBlur, 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const handleSavedPlacesClick = () => {
+    if (onSelectCategory) {
+      onSelectCategory('My Saved Places');
+    }
+    setIsProfileOpen(false);
+  };
 
   return (
     <nav className={`navbar-container ${isApp ? 'app-variant' : 'landing-variant'}`}>
@@ -66,51 +73,45 @@ const Navbar = ({ variant = 'landing', onOpenAuth, onSearchFocus, onSearchBlur, 
               </div>
 
               {isProfileOpen && (
-                <div className="profile-dropdown">
+                <div className="profile-dropdown-v2">
                   <button className="dropdown-close" onClick={() => setIsProfileOpen(false)}>
-                    <X size={20} />
+                    <X size={24} />
                   </button>
                   
-                  <div className="dropdown-header">
-                    <div className="header-avatar">
-                      <User size={32} />
-                      <div className="premium-badge">
+                  <div className="dropdown-header-v2">
+                    <div className="avatar-section">
+                      <div className="header-avatar-v2">
+                        <User size={40} color="white" />
+                      </div>
+                      <div className="premium-badge-v2">
                         <Crown size={10} fill="currentColor" />
                         PREMIUM
                       </div>
                     </div>
-                    <h3 className="username">roadtripper7752242</h3>
+                    <h3 className="username-v2">roadtripper7752242</h3>
                   </div>
 
-                  <div className="dropdown-menu">
-                    <div className="menu-item">
-                      <UserIcon size={18} />
-                      <span>Profile</span>
+                  <div className="dropdown-menu-list">
+                    <Link to="/profile" className="menu-list-item" onClick={() => setIsProfileOpen(false)}>
+                      Profile
+                    </Link>
+                    <Link to="/profile" className="menu-list-item" onClick={() => setIsProfileOpen(false)}>
+                      My Trips
+                    </Link>
+                    <div className="menu-list-item active" onClick={handleSavedPlacesClick}>
+                      My Saved Places
                     </div>
-                    <div className="menu-item">
-                      <MapIcon size={18} />
-                      <span>My Trips</span>
+                    <div className="menu-list-item">
+                      My Reviews
                     </div>
-                    <div className="menu-item">
-                      <Bookmark size={18} />
-                      <span>My Saved Places</span>
+                    <div className="menu-list-item">
+                      Settings
                     </div>
-                    <div className="menu-item">
-                      <FileText size={18} />
-                      <span>My Reviews</span>
+                    <div className="menu-list-item">
+                      Support
                     </div>
-                    <div className="menu-divider"></div>
-                    <div className="menu-item">
-                      <Settings size={18} />
-                      <span>Settings</span>
-                    </div>
-                    <div className="menu-item">
-                      <HelpCircle size={18} />
-                      <span>Support</span>
-                    </div>
-                    <div className="menu-item sign-out">
-                      <LogOut size={18} />
-                      <span>Sign Out</span>
+                    <div className="menu-list-item sign-out">
+                      Sign Out
                     </div>
                   </div>
                 </div>

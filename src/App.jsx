@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import AppPage from './pages/AppPage';
 import AutopilotWizard from './pages/AutopilotWizard';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/autopilot" element={<AutopilotWizard />} />
         <Route path="/app" element={<AppPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </BrowserRouter>
   );

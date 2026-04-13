@@ -60,10 +60,22 @@ const AppPage = () => {
   const [initialTripDestination, setInitialTripDestination] = useState('');
   const [itineraryStops, setItineraryStops] = useState(INITIAL_STOPS);
   const [activeExploreCategory, setActiveExploreCategory] = useState(null);
+  const [savedPlaces, setSavedPlaces] = useState([]);
 
   const handleUpdateStops = async (newStops) => {
     const recalculated = await recalculateWaypoints(newStops);
     setItineraryStops(recalculated);
+  };
+
+  const handleToggleSavePlace = (place) => {
+    setSavedPlaces(prev => {
+      const isAlreadySaved = prev.some(p => p.id === place.id);
+      if (isAlreadySaved) {
+        return prev.filter(p => p.id !== place.id);
+      } else {
+        return [...prev, place];
+      }
+    });
   };
 
   const handleAddStopToTrip = async (place) => {
@@ -181,6 +193,10 @@ const AppPage = () => {
         onSearchBlur={() => setSearchOpen(false)}
         activeExploreCategory={activeExploreCategory}
         onClearExploreCategory={() => setActiveExploreCategory(null)}
+        onSelectCategory={(cat) => {
+          setActiveExploreCategory(cat);
+          setActiveTab('explore');
+        }}
       />
 
       <div className="app-content">
@@ -246,6 +262,8 @@ const AppPage = () => {
               }}
               isTripActive={isTripActive}
               onAddCurrentTripStop={handleAddStopToTrip}
+              savedPlaces={savedPlaces}
+              onToggleSavePlace={handleToggleSavePlace}
             />
           )}
         </div>

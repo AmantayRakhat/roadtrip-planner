@@ -22,7 +22,7 @@ import {
 import './ItineraryPanel.css';
 
 // ─── Sortable Stop Item (The "Perfect" Structure) ───────────────────────────
-const SortableStop = ({ stop, index, visibleIndex, lineType, total, nextStop, activeMenuId, toggleMenu, handleRemoveStop, onFindStops, onToggleVisibility, isLast }) => {
+const SortableStop = ({ stop, index, visibleIndex, isFirstVisible, isLastVisible, isBetweenVisible, total, nextStop, activeMenuId, toggleMenu, handleRemoveStop, onFindStops, onToggleVisibility, isLast }) => {
   const {
     attributes,
     listeners,
@@ -41,7 +41,7 @@ const SortableStop = ({ stop, index, visibleIndex, lineType, total, nextStop, ac
   };
 
   return (
-    <div ref={setNodeRef} style={style} className={`route-stop-item ${isLast ? 'is-last-stop' : ''} ${stop.isVisible === false ? 'is-hidden' : ''} line-${lineType}`}>
+    <div ref={setNodeRef} style={style} className={`route-stop-item ${isLast ? 'is-last-stop' : ''} ${stop.isVisible === false ? 'is-hidden' : ''} ${isFirstVisible ? 'is-first-visible' : ''} ${isLastVisible ? 'is-last-visible' : ''} ${isBetweenVisible ? 'is-between-visible' : ''}`}>
       <div className="stop-left-column">
         {stop.isVisible !== false && <div className="stop-number">{visibleIndex}</div>}
       </div>
@@ -232,20 +232,13 @@ const ItineraryPanel = ({ onClose, onFindStops, stops = [], onUpdateStops, onRec
                 {(() => {
                   let visibleCount = 0;
                   const firstVisibleIdx = stops.findIndex(s => s.isVisible !== false);
-                  const reversedIdx = [...stops].reverse().findIndex(s => s.isVisible !== false);
-                  const lastVisibleIdx = reversedIdx === -1 ? -1 : stops.length - 1 - reversedIdx;
+                  const lastVisibleIdx = stops.map(s => s.isVisible !== false).lastIndexOf(true);
 
                   return stops.map((stop, i) => {
-                    let lineType = 'middle';
-                    if (firstVisibleIdx === -1 || i < firstVisibleIdx || i > lastVisibleIdx) {
-                      lineType = 'none';
-                    } else if (i === firstVisibleIdx) {
-                      lineType = (firstVisibleIdx === lastVisibleIdx) ? 'none' : 'start';
-                    } else if (i === lastVisibleIdx) {
-                      lineType = 'end';
-                    }
-
-                    if (stop.isVisible !== false) visibleCount++;
+                    const isVisible = stop.isVisible !== false;
+                    const isBetweenVisible = firstVisibleIdx !== -1 && lastVisibleIdx !== -1 && i > firstVisibleIdx && i < lastVisibleIdx;
+                    
+                    if (isVisible) visibleCount++;
                     
                     return (
                       <SortableStop
@@ -253,7 +246,9 @@ const ItineraryPanel = ({ onClose, onFindStops, stops = [], onUpdateStops, onRec
                         stop={stop}
                         index={i}
                         visibleIndex={visibleCount}
-                        lineType={lineType}
+                        isFirstVisible={i === firstVisibleIdx}
+                        isLastVisible={i === lastVisibleIdx}
+                        isBetweenVisible={isBetweenVisible}
                         total={stops.length}
                         nextStop={stops[i + 1]}
                         isLast={i === stops.length - 1}

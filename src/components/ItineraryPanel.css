@@ -142,9 +142,8 @@
   z-index: 1;
 }
 
-/* Perfect Connector Line Segment */
-/* Base Line Style (Hidden by default) */
-.itinerary-panel.premium-v2 .stop-left-column::before {
+/* Unified Seamless Route Line System - CALIBRATED */
+.stop-left-column::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -155,24 +154,36 @@
   display: none;
 }
 
-/* Start Segment: From center of bubble downwards */
-.line-start .stop-left-column::before {
-  display: block;
-  top: 14px;
-  height: calc(100% - 14px + 1.25rem);
-}
-
-/* Middle Segment: Full height of the item plus gap */
-.line-middle .stop-left-column::before {
+/* 1. FIRST VISIBLE STOP: Start at EXACT bubble center (15px margin + 13px radius = 28px) */
+.route-stop-item.is-first-visible:not(.is-last-visible) .stop-left-column::after {
   display: block;
   top: 0;
-  height: calc(100% + 1.25rem);
+  height: calc(100% + 1.25rem + 5px);
+  clip-path: inset(28px 0 0 0); /* PRECISE CUT AT CENTER */
 }
 
-/* None and End Segments: No line below */
-.line-none .stop-left-column::before,
-.line-end .stop-left-column::before,
-.route-stop-item.ghost .stop-left-column::before {
+/* 2. BETWEEN VISIBLE STOPS (Hidden or Visible): Full flow */
+.route-stop-item.is-between-visible .stop-left-column::after {
+  display: block;
+  top: -5px;
+  height: calc(100% + 1.25rem + 10px);
+}
+
+/* 3. LAST VISIBLE STOP: End at EXACT bubble center (28px) */
+.route-stop-item.is-last-visible:not(.is-first-visible) .stop-left-column::after {
+  display: block;
+  top: -5px;
+  height: calc(5px + 28px); /* Starts above and ends at 28px center */
+  clip-path: inset(0 0 1px 0); /* Clean cut at center */
+}
+
+/* 4. SINGLE VISIBLE STOP: No lines */
+.route-stop-item.is-first-visible.is-last-visible .stop-left-column::after {
+  display: none !important;
+}
+
+/* 5. Cleanup for extra items */
+.route-stop-item:not(.is-first-visible):not(.is-between-visible):not(.is-last-visible) .stop-left-column::after {
   display: none !important;
 }
 
@@ -183,7 +194,7 @@
   position: relative;
   width: 28px;
   flex-shrink: 0;
-  align-self: stretch; /* crucial for calc(100%) height of line */
+  align-self: stretch;
 }
 
 .itinerary-panel.premium-v2 .stop-number {
@@ -313,11 +324,6 @@
 
 .eye-action-btn.hidden {
   color: #94a3b8; /* Muted color for EyeOff */
-}
-
-/* Ensure line logic doesn't hide when card is hidden */
-.route-stop-item.is-hidden .stop-left-column::after {
-  opacity: 1;
 }
 
 /* Footer Section */

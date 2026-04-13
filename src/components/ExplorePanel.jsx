@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Bookmark, Star, ChevronDown, ListFilter, MoreHorizontal, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Bookmark, Star, ChevronDown, ListFilter, MoreHorizontal, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import SortModal from './SortModal';
 import RatingFilterModal from './RatingFilterModal';
 import FilterYourResultsModal from './FilterYourResultsModal';
@@ -67,8 +67,9 @@ const SEARCH_RESULTS = [
   }
 ];
 
-const ExplorePanel = ({ activeCategory, onAddPlace, isTripActive, onAddCurrentTripStop }) => {
+const ExplorePanel = ({ activeCategory, onAddPlace, isTripActive, onAddCurrentTripStop, savedPlaces = [], onToggleSavePlace }) => {
   const isSearchMode = !!activeCategory;
+  const isSavedPlacesMode = activeCategory === 'My Saved Places';
   const scrollRef = useRef(null);
   const [showSortModal, setShowSortModal] = useState(false);
   const [showRatingModal, setShowRatingModal] = useState(false);
@@ -77,6 +78,11 @@ const ExplorePanel = ({ activeCategory, onAddPlace, isTripActive, onAddCurrentTr
   const [filters, setFilters] = useState({ rating: 'Any' });
   const [activeMile, setActiveMile] = useState('30');
 
+  // Filter logic
+  const displayPlaces = isSavedPlacesMode ? savedPlaces : (isSearchMode ? SEARCH_RESULTS : DEFAULT_PLACES);
+
+  const isSaved = (placeId) => savedPlaces.some(p => p.id === placeId);
+
   const scrollChips = (direction) => {
     if (scrollRef.current) {
       const scrollAmount = 200;
@@ -84,11 +90,19 @@ const ExplorePanel = ({ activeCategory, onAddPlace, isTripActive, onAddCurrentTr
     }
   };
 
-  const handleAddClick = (place) => {
+  const handleAddClick = (e, place) => {
+    e.stopPropagation();
     if (isTripActive && onAddCurrentTripStop) {
       onAddCurrentTripStop(place);
     } else if (onAddPlace) {
       onAddPlace(place.title);
+    }
+  };
+
+  const handleSaveClick = (e, place) => {
+    e.stopPropagation();
+    if (onToggleSavePlace) {
+      onToggleSavePlace(place);
     }
   };
 
@@ -108,17 +122,24 @@ const ExplorePanel = ({ activeCategory, onAddPlace, isTripActive, onAddCurrentTr
   const renderDefaultGrid = () => (
     <div className="explore-panel default-mode">
       <div className="explore-header">
-        <h2>Must-See Extraordinary Places</h2>
-        <button className="see-all-btn">See all</button>
+        <h2>{isSavedPlacesMode ? 'My Saved Places' : 'Must-See Extraordinary Places'}</h2>
+        {!isSavedPlacesMode && <button className="see-all-btn">See all</button>}
       </div>
 
       <div className="explore-grid">
-        {DEFAULT_PLACES.map((place) => (
+        {displayPlaces.map((place) => (
           <div key={place.id} className="explore-card">
             <div className="explore-card-graphic" style={{ backgroundColor: place.bgColor }}>
               <div className="card-actions">
-                <button className="card-btn add-btn" onClick={() => handleAddClick(place)}>+</button>
-                <button className="card-btn bookmark-btn"><Bookmark size={16} fill="currentColor" /></button>
+                <button className="card-btn add-btn" onClick={(e) => handleAddClick(e, place)}>
+                  <Plus size={18} strokeWidth={2} />
+                </button>
+                <button 
+                  className={`card-btn bookmark-btn ${isSaved(place.id) ? 'saved' : ''}`}
+                  onClick={(e) => handleSaveClick(e, place)}
+                >
+                  <Bookmark size={16} fill={isSaved(place.id) ? "currentColor" : "none"} />
+                </button>
               </div>
               <div className="graphic-placeholder">
                 <div className="graphic-shape"></div>
@@ -134,6 +155,12 @@ const ExplorePanel = ({ activeCategory, onAddPlace, isTripActive, onAddCurrentTr
             </div>
           </div>
         ))}
+        {isSavedPlacesMode && displayPlaces.length === 0 && (
+          <div className="empty-saved-state">
+            <Bookmark size={48} color="#d1d5db" />
+            <p>You haven't saved any places yet.</p>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -141,7 +168,7 @@ const ExplorePanel = ({ activeCategory, onAddPlace, isTripActive, onAddCurrentTr
   const renderSearchGrid = () => (
     <div className="explore-panel search-mode">
       <div className="explore-header sticky-header">
-        <h1>Explore</h1>
+        <h1>{isSavedPlacesMode ? 'My Saved Places' : 'Explore'}</h1>
         
         <div className="distance-filter">
           <p>Search results within km of your route</p>
@@ -196,13 +223,20 @@ const ExplorePanel = ({ activeCategory, onAddPlace, isTripActive, onAddCurrentTr
       </div>
 
       <div className="explore-grid">
-        {SEARCH_RESULTS.map((place) => (
+        {displayPlaces.map((place) => (
           <div key={place.id} className="explore-card realistic">
             <div className="explore-card-image">
-              <img src={place.img} alt={place.title} />
+              <img src={place.img || 'https://images.unsplash.com/photo-1555507036-ab1d4075cbf9?auto=format&fit=crop&q=80&w=400&h=300'} alt={place.title} />
               <div className="card-actions">
-                <button className="card-btn add-btn" onClick={() => handleAddClick(place)}>+</button>
-                <button className="card-btn bookmark-btn"><Bookmark size={16} fill="currentColor" /></button>
+                <button className="card-btn add-btn" onClick={(e) => handleAddClick(e, place)}>
+                  <Plus size={18} strokeWidth={2} />
+                </button>
+                <button 
+                  className={`card-btn bookmark-btn ${isSaved(place.id) ? 'saved' : ''}`}
+                  onClick={(e) => handleSaveClick(e, place)}
+                >
+                  <Bookmark size={16} fill={isSaved(place.id) ? "currentColor" : "none"} />
+                </button>
               </div>
             </div>
             <div className="explore-card-info">
@@ -217,6 +251,12 @@ const ExplorePanel = ({ activeCategory, onAddPlace, isTripActive, onAddCurrentTr
             </div>
           </div>
         ))}
+        {isSavedPlacesMode && displayPlaces.length === 0 && (
+          <div className="empty-saved-state">
+            <Bookmark size={48} color="#d1d5db" />
+            <p>You haven't saved any places yet.</p>
+          </div>
+        )}
       </div>
     </div>
   );

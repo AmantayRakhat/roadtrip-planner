@@ -238,17 +238,17 @@
 
 .card-actions {
   position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
-  right: 0.5rem;
+  top: 0.75rem;
+  left: 0.75rem;
+  right: 0.75rem;
   display: flex;
   justify-content: space-between;
   z-index: 2;
 }
 
 .card-btn {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: white;
   border: none;
@@ -256,52 +256,83 @@
   align-items: center;
   justify-content: center;
   color: #1a2e5a;
-  font-weight: 600;
-  font-size: 1.2rem;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.card-btn:hover {
+  transform: scale(1.1);
+  background-color: #f9fafb;
+}
+
+.card-btn.bookmark-btn {
+  font-size: 1rem;
+  color: #1a2e5a;
+}
+
+.card-btn.bookmark-btn.saved {
+  color: #1a2e5a;
 }
 
 .explore-card-info {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  padding-top: 0.25rem;
 }
 
 .explore-card-info h4 {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #1a2e5a;
 }
 
 .explore-card-info p {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: #6b7280;
 }
 
 .rating {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  font-size: 0.85rem;
-  font-weight: 600;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 700;
   color: #1a2e5a;
   margin-top: 0.25rem;
 }
 
 .rating.yelp {
-  color: #6b7280;
+  color: #374151;
   font-weight: 500;
 }
 
 .yelp-star-box {
-  background-color: #ff5a5f;
+  background-color: #f73859; /* Bright UI Red */
   border-radius: 4px;
   width: 18px;
   height: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.empty-saved-state {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #9ca3af;
+  gap: 1rem;
+}
+
+.empty-saved-state p {
+  font-size: 1rem;
+  font-weight: 500;
 }
