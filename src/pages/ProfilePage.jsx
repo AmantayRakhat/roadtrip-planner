@@ -92,6 +92,15 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('tab') === 'settings') {
+      setIsSettingsMode(true);
+      setActiveSettingsTab('profile');
+      window.history.replaceState({}, '', '/profile');
+    }
+  }, []);
+  
+  useEffect(() => {
     const handleClickOutside = () => setActiveMenuId(null);
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
@@ -240,9 +249,9 @@ const ProfilePage = () => {
             >
               <Mail size={18} /> Email preferences
             </button>
-            <button className="settings-nav-item">
+            <a href="/support" target="_blank" rel="noopener noreferrer" className="settings-nav-item">
               <HelpCircle size={18} /> Help & support
-            </button>
+            </a>
           </nav>
 
           <button className="sign-out-link">Sign out</button>
@@ -452,8 +461,11 @@ const ProfilePage = () => {
 
   return (
     <div className="profile-page">
-      <Navbar variant="app" />
-      
+      {/* <Navbar variant="app" /> */}
+      <Navbar variant="app" onOpenSettings={() => {
+        setIsSettingsMode(true);
+        setActiveSettingsTab('profile');
+      }} />
       <main className="profile-container">
         {isSettingsMode ? renderSettings() : renderProfileMain()}
       </main>

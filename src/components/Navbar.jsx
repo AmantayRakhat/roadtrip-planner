@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { Search, ChevronDown, User, X, Crown, LogOut, Settings, HelpCircle, FileText, Heart, Map as MapIcon, User as UserIcon, Bookmark } from 'lucide-react';
 import './Navbar.css';
 
-const Navbar = ({ variant = 'landing', onOpenAuth, onSearchFocus, onSearchBlur, activeExploreCategory, onClearExploreCategory, onSelectCategory }) => {
+// const Navbar = ({ variant = 'landing', onOpenAuth, onSearchFocus, onSearchBlur, activeExploreCategory, onClearExploreCategory, onSelectCategory }) => {
+  const Navbar = ({ variant = 'landing', onOpenAuth, onSearchFocus, onSearchBlur, activeExploreCategory, onClearExploreCategory, onSelectCategory, onOpenSettings }) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const profileRef = useRef(null);
   const isApp = variant === 'app';
@@ -60,9 +61,9 @@ const Navbar = ({ variant = 'landing', onOpenAuth, onSearchFocus, onSearchBlur, 
       <div className="navbar-links">
         {isApp ? (
           <>
-            <span className="nav-link">Membership <ChevronDown size={14} /></span>
+            {/* <span className="nav-link">Membership <ChevronDown size={14} /></span>
             <span className="nav-link">For RVers <ChevronDown size={14} /></span>
-            <span className="nav-link">Trip Ideas <ChevronDown size={14} /></span>
+            <span className="nav-link">Trip Ideas <ChevronDown size={14} /></span> */}
             <span className="nav-link">Trip Planner</span>
             <div className="profile-menu-wrapper" ref={profileRef}>
               <div 
@@ -104,12 +105,22 @@ const Navbar = ({ variant = 'landing', onOpenAuth, onSearchFocus, onSearchBlur, 
                     <div className="menu-list-item">
                       My Reviews
                     </div>
-                    <div className="menu-list-item">
+                    {/* <div className="menu-list-item">
+                      Settings
+                    </div> */}
+                    <div className="menu-list-item" onClick={() => {
+                      setIsProfileOpen(false);
+                      if (onOpenSettings) {
+                        onOpenSettings();
+                      } else {
+                        window.location.href = '/profile?tab=settings';
+                      }
+                    }}>
                       Settings
                     </div>
-                    <div className="menu-list-item">
+                    <a href="/support" target="_blank" rel="noopener noreferrer" className="menu-list-item">
                       Support
-                    </div>
+                    </a>
                     <div className="menu-list-item sign-out">
                       Sign Out
                     </div>

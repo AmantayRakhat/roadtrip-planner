@@ -1,0 +1,28 @@
+.legal-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.legal-section {
+  margin-bottom: 3rem;
+}
+
+.legal-h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+  margin-bottom: 1rem;
+}
+
+.legal-p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-gray);
+}
+
+@media (max-width: 768px) {
+  .legal-content {
+    padding: 1rem;
+  }
+}

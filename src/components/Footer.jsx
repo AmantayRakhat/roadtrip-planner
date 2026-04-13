@@ -17,38 +17,37 @@ const Footer = () => {
         <div className="footer-col">
           <h4 className="footer-col-title">ABOUT</h4>
           <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Support</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="/about" target="_blank" rel="noopener noreferrer">About Us</a></li>
+            <li><a href="/about#careers" target="_blank" rel="noopener noreferrer">Careers</a></li>
+            <li><a href="/support" target="_blank" rel="noopener noreferrer">Support</a></li>
+            <li><a href="/about#contact" target="_blank" rel="noopener noreferrer">Contact</a></li>
           </ul>
         </div>
         <div className="footer-col">
           <h4 className="footer-col-title">BUSINESS TOOLS</h4>
           <ul>
-            <li><a href="#">Partnerships</a></li>
-            <li><a href="#">Media Center</a></li>
+            <li><a href="/business" target="_blank" rel="noopener noreferrer">Partnerships</a></li>
+            <li><a href="/business#media" target="_blank" rel="noopener noreferrer">Media Center</a></li>
           </ul>
         </div>
         <div className="footer-col">
           <h4 className="footer-col-title">GET INSPIRED</h4>
           <ul>
-            <li><a href="#">Road trip ideas by region</a></li>
-            <li><a href="#">National Parks of Kazakhstan</a></li>
-            <li><a href="#">Famous routes</a></li>
-            <li><a href="#">Traveler Stories</a></li>
+            <li><a href="/inspiration" target="_blank" rel="noopener noreferrer">Road trip ideas by region</a></li>
+            <li><a href="/inspiration#parks" target="_blank" rel="noopener noreferrer">National Parks of Kazakhstan</a></li>
+            <li><a href="/inspiration#routes" target="_blank" rel="noopener noreferrer">Famous routes</a></li>
+            <li><a href="/inspiration#stories" target="_blank" rel="noopener noreferrer">Traveler Stories</a></li>
           </ul>
         </div>
-
       </div>
 
       <div className="footer-bottom">
         <div className="footer-logo">RoadTrip Planner</div>
         <div className="footer-legal">
           <div className="footer-legal-links">
-            <a href="#">PRIVACY POLICY</a>
-            <a href="#">TERMS OF SERVICE</a>
-            <a href="#">COPYRIGHT</a>
+            <a href="/privacy" target="_blank" rel="noopener noreferrer">PRIVACY POLICY</a>
+            <a href="/terms" target="_blank" rel="noopener noreferrer">TERMS OF SERVICE</a>
+            <a href="/copyright" target="_blank" rel="noopener noreferrer">COPYRIGHT</a>
           </div>
           <div className="footer-copyright">
             © RoadTrip Planner, LLC 2026

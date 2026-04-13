@@ -1,0 +1,207 @@
+.inspiration-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.inspiration-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease;
+}
+
+.inspiration-card:hover {
+  transform: translateY(-8px);
+}
+
+.ins-card-image {
+  height: 240px;
+  position: relative;
+}
+
+.ins-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ins-card-duration {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+  backdrop-filter: blur(4px);
+}
+
+.ins-card-content {
+  padding: 2rem;
+}
+
+.ins-card-region {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ins-card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0.5rem 0 1rem;
+  color: var(--primary-blue);
+}
+
+.ins-card-desc {
+  font-size: 1rem;
+  color: var(--text-gray);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.ins-card-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-blue);
+  font-weight: 700;
+  font-size: 1rem;
+  transition: gap 0.2s;
+}
+
+.ins-card-link:hover {
+  gap: 0.8rem;
+}
+
+.national-parks-banner {
+  background: var(--primary-blue);
+  color: white;
+  padding: 5rem;
+  border-radius: 30px;
+}
+
+.national-parks-banner .section-title {
+  color: white;
+}
+
+.national-parks-banner .section-title::after {
+  background-color: var(--accent-color);
+}
+
+.parks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  margin-top: 4rem;
+}
+
+.park-card {
+  position: relative;
+}
+
+.park-number {
+  font-size: 3rem;
+  font-weight: 800;
+  opacity: 0.2;
+  margin-bottom: -1rem;
+}
+
+.park-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.park-highlight {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+.park-desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.stories-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.story-card {
+  background: var(--bg-gray);
+  padding: 3rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.story-quote {
+  font-size: 1.25rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--primary-blue);
+  margin-bottom: 2rem;
+}
+
+.story-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.author-avatar {
+  width: 48px;
+  height: 48px;
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.author-info strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.author-info span {
+  font-size: 0.85rem;
+  color: var(--text-gray);
+}
+
+@media (max-width: 992px) {
+  .stories-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .national-parks-banner {
+    padding: 3rem 1.5rem;
+  }
+}

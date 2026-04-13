@@ -1,0 +1,147 @@
+.business-tools-section {
+  background: var(--bg-gray);
+  padding: 5rem;
+  border-radius: 30px;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.tool-item {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--border-color);
+}
+
+.tool-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.tool-icon-circle {
+  width: 40px;
+  height: 40px;
+  background: #eff6ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary-blue);
+}
+
+.tool-item h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+}
+
+.tool-item p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-gray);
+}
+
+.media-assets-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.asset-card {
+  background: white;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  border: 1px solid var(--border-color);
+  transition: border-color 0.2s;
+}
+
+.asset-card:hover {
+  border-color: var(--accent-color);
+}
+
+.asset-type {
+  color: var(--text-gray);
+}
+
+.asset-info {
+  flex: 1;
+}
+
+.asset-info h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.asset-info span {
+  font-size: 0.85rem;
+  color: var(--text-gray);
+}
+
+.asset-download {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-blue);
+  transition: all 0.2s;
+}
+
+.asset-download:hover {
+  background: var(--primary-blue);
+  color: white;
+}
+
+.business-cta {
+  margin-top: 8rem;
+  text-align: center;
+}
+
+.cta-box {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  color: white;
+  padding: 5rem 2rem;
+  border-radius: 30px;
+}
+
+.cta-box h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  font-family: Georgia, serif;
+}
+
+.cta-box p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .business-tools-section {
+    padding: 3rem 1.5rem;
+  }
+  
+  .asset-card {
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+}
